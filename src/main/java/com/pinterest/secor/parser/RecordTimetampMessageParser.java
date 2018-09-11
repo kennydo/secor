@@ -1,8 +1,7 @@
-package java.com.pinterest.secor.parser;
+package com.pinterest.secor.parser;
 
 import com.pinterest.secor.common.SecorConfig;
 import com.pinterest.secor.message.Message;
-import com.pinterest.secor.parser.TimestampedMessageParser;
 
 /**
  * RecordTimetampMessageParser extracts the timestamp from the Kafka record's metadata.
