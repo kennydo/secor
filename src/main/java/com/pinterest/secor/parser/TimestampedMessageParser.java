@@ -25,7 +25,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-public abstract class TimestampedMessageParser extends MessageParser implements Partitioner {
+public class TimestampedMessageParser extends MessageParser implements Partitioner {
 
     private static final Logger LOG = LoggerFactory.getLogger(TimestampedMessageParser.class);
 
@@ -163,7 +163,9 @@ public abstract class TimestampedMessageParser extends MessageParser implements 
         return timestampMillis;
     }
 
-    public abstract long extractTimestampMillis(final Message message) throws Exception;
+    public long extractTimestampMillis(final Message message) throws Exception {
+        return message.getTimestamp();
+    }
 
     public long getTimestampMillis(Message message) throws Exception {
         return (mUseKafkaTimestamp) ? toMillis(message.getTimestamp()) : extractTimestampMillis(message);
