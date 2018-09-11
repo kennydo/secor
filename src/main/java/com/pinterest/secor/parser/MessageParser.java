@@ -41,19 +41,14 @@ public abstract class MessageParser {
     private static final Logger LOG = LoggerFactory.getLogger(MessageParser.class);
 
     public MessageParser(SecorConfig config) {
-        try {
-            mConfig = config;
-            offsetPrefix = usingOffsetPrefix(mConfig);
-            if (mConfig.getMessageTimestampName() != null &&
-                !mConfig.getMessageTimestampName().isEmpty() &&
-                mConfig.getMessageTimestampNameSeparator() != null &&
-                !mConfig.getMessageTimestampNameSeparator().isEmpty()) {
-                String separatorPattern = Pattern.quote(mConfig.getMessageTimestampNameSeparator());
-                mNestedFields = mConfig.getMessageTimestampName().split(separatorPattern);
-            }
-        } catch (RuntimeException e) {
-            LOG.error("Failed to initialize consumer", e);
-            throw e;
+        mConfig = config;
+        offsetPrefix = usingOffsetPrefix(mConfig);
+        if (mConfig.getMessageTimestampName() != null &&
+            !mConfig.getMessageTimestampName().isEmpty() &&
+            mConfig.getMessageTimestampNameSeparator() != null &&
+            !mConfig.getMessageTimestampNameSeparator().isEmpty()) {
+            String separatorPattern = Pattern.quote(mConfig.getMessageTimestampNameSeparator());
+            mNestedFields = mConfig.getMessageTimestampName().split(separatorPattern);
         }
     }
 

@@ -62,41 +62,36 @@ public abstract class TimestampedMessageParser extends MessageParser implements 
     public TimestampedMessageParser(SecorConfig config) {
         super(config);
 
-        try {
-            mUsingHourly = usingHourly(config);
-            mUsingMinutely = usingMinutely(config);
-            mUseKafkaTimestamp = useKafkaTimestamp(config);
-            mDtFormat = usingDateFormat(config);
-            mHrFormat = usingHourFormat(config);
-            mMinFormat = usingMinuteFormat(config);
+        mUsingHourly = usingHourly(config);
+        mUsingMinutely = usingMinutely(config);
+        mUseKafkaTimestamp = useKafkaTimestamp(config);
+        mDtFormat = usingDateFormat(config);
+        mHrFormat = usingHourFormat(config);
+        mMinFormat = usingMinuteFormat(config);
 
-            mDtPrefix = usingDatePrefix(config);
-            mHrPrefix = usingHourPrefix(config);
-            mMinPrefix = usingMinutePrefix(config);
+        mDtPrefix = usingDatePrefix(config);
+        mHrPrefix = usingHourPrefix(config);
+        mMinPrefix = usingMinutePrefix(config);
 
-            LOG.info("UsingHourly: {}", mUsingHourly);
-            LOG.info("UsingMin: {}", mUsingMinutely);
-            mFinalizerDelaySeconds = config.getFinalizerDelaySeconds();
-            LOG.info("FinalizerDelaySeconds: {}", mFinalizerDelaySeconds);
+        LOG.info("UsingHourly: {}", mUsingHourly);
+        LOG.info("UsingMin: {}", mUsingMinutely);
+        mFinalizerDelaySeconds = config.getFinalizerDelaySeconds();
+        LOG.info("FinalizerDelaySeconds: {}", mFinalizerDelaySeconds);
 
-            mDtFormatter = new SimpleDateFormat(mDtFormat);
-            mDtFormatter.setTimeZone(config.getTimeZone());
+        mDtFormatter = new SimpleDateFormat(mDtFormat);
+        mDtFormatter.setTimeZone(config.getTimeZone());
 
-            mHrFormatter = new SimpleDateFormat(mHrFormat);
-            mHrFormatter.setTimeZone(config.getTimeZone());
+        mHrFormatter = new SimpleDateFormat(mHrFormat);
+        mHrFormatter.setTimeZone(config.getTimeZone());
 
-            mMinFormatter = new SimpleDateFormat(mMinFormat);
-            mMinFormatter.setTimeZone(config.getTimeZone());
+        mMinFormatter = new SimpleDateFormat(mMinFormat);
+        mMinFormatter.setTimeZone(config.getTimeZone());
 
-            mDtHrFormatter = new SimpleDateFormat(mDtFormat+ "-" + mHrFormat);
-            mDtHrFormatter.setTimeZone(config.getTimeZone());
+        mDtHrFormatter = new SimpleDateFormat(mDtFormat+ "-" + mHrFormat);
+        mDtHrFormatter.setTimeZone(config.getTimeZone());
 
-            mDtHrMinFormatter = new SimpleDateFormat(mDtFormat+ "-" + mHrFormat + "-" + mMinFormat);
-            mDtHrMinFormatter.setTimeZone(config.getTimeZone());
-        } catch (RuntimeException e) {
-            LOG.error("Failed to initialize parser", e);
-            throw e;
-        }
+        mDtHrMinFormatter = new SimpleDateFormat(mDtFormat+ "-" + mHrFormat + "-" + mMinFormat);
+        mDtHrMinFormatter.setTimeZone(config.getTimeZone());
     }
 
     static boolean usingHourly(SecorConfig config) {
