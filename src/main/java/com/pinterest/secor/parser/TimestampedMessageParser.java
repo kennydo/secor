@@ -62,16 +62,32 @@ public abstract class TimestampedMessageParser extends MessageParser implements 
     public TimestampedMessageParser(SecorConfig config) {
         super(config);
 
+        LOG.info("Finished parent super");
+
         mUsingHourly = usingHourly(config);
+        LOG.info("Got using hourly");
+
         mUsingMinutely = usingMinutely(config);
+        LOG.info("got using minutely");
+
         mUseKafkaTimestamp = useKafkaTimestamp(config);
+        LOG.info("Got using kafka timestamp");
+
         mDtFormat = usingDateFormat(config);
+        LOG.info("Got dt format");
+
         mHrFormat = usingHourFormat(config);
+        LOG.info("got hr format");
+
         mMinFormat = usingMinuteFormat(config);
+        LOG.info("got minute format");
 
         mDtPrefix = usingDatePrefix(config);
+        LOG.info("got dt perfix");
         mHrPrefix = usingHourPrefix(config);
+        LOG.info("Got hor prefix");
         mMinPrefix = usingMinutePrefix(config);
+        LOG.info("got minute prefix");
 
         LOG.info("UsingHourly: {}", mUsingHourly);
         LOG.info("UsingMin: {}", mUsingMinutely);
