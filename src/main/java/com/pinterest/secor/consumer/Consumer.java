@@ -87,7 +87,6 @@ public class Consumer extends Thread {
             // thread id.
             init();
         } catch (Exception e) {
-            LOG.error("Failed to initialize consumer", e);
             throw new RuntimeException("Failed to initialize the consumer", e);
         }
         // check upload policy every N seconds or 10,000 messages/consumer timeouts
